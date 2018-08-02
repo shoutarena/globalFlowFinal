@@ -38,7 +38,6 @@ public class HomeController {
 	
 	@RequestMapping(value="/main.do")
 	public String gomain() {
-		System.out.println("dd");
 		return "main";
 	}
 }
