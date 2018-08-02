@@ -36,7 +36,7 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value="/gogo.do")
+	@RequestMapping(value="/main.do")
 	public String gomain() {
 		System.out.println("dd");
 		return "main";
