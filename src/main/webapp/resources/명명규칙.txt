@@ -1,0 +1,25 @@
+﻿표기법 카멜케이싱 userIdx 시작은 소문자 단어가바뀔때 대문자
+
+메소드
+
+***AllList
+
+***Get
+
+***Add
+
+***Update
+
+***Del
+
+***Search
+
+***Save
+
+***Read
+
+***OutFile
+
+***InfutFile
+
+
