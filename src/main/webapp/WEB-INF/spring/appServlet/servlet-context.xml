@@ -7,11 +7,8 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-	
-	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
-
+	
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/css/**" location="/resources/css/" /> 
@@ -23,6 +20,7 @@
 		<beans:property name="order" value="1" />
 	</beans:bean>
 	<beans:bean id="fileDown" class="com.junoFlow.commons.DownloadView" />
+	<beans:bean id="flowJson" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
 
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
@@ -31,7 +29,4 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.contoller.*" />
-	
-	
-	
 </beans:beans>

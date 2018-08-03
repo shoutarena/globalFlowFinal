@@ -2,7 +2,7 @@ create table member(
     memberidx number(7) primary key,
     id varchar2(20) not null,
     pwd varchar2(20) not null,
-    name varchar2(2) not null,
+    name varchar2(20) not null,
     zipcode varchar2(400) not null,
     addr1 varchar2(400) not null,
     addr2 varchar2(400) not null,

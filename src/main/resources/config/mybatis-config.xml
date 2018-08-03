@@ -3,13 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<!-- <typeAliases>
-		<typeAlias type="com.temp.temp" alias="empdao"/>
-	</typeAliases> -->
 	<typeAliases>
-		
+		<typeAlias type="com.member.model.junoflow.MemberDTO" alias="memdto"/>
 	</typeAliases>
 	<mappers>
-		<mapper resource="sql/temp-mapper.xml" />
+		<mapper resource="sql/member-mapper.xml" />
 	</mappers>
 </configuration>

@@ -21,10 +21,42 @@
 	<script src="js/jquery/jquery-3.3.1.min.js"></script>
     <script src="js/boot/bootstrap.js"></script>
     <script src="js/boot/bootstrap-select.min.js"></script>
+    <style>
+        #userPopOver{
+            width:300px;
+            height:300px;
+        }
+        #topLogo{
+            font-size: 20px;
+            color:white;
+        }
+    </style>
     <script>
-    	$(document).ready(function(){
-    		
-    	})
+        $(document).ready(function(){
+            var msgPopOver = '';
+            msgPopOver += '<div id="userPopOver" class="container">';
+            msgPopOver +=   '<div class="row">';
+            msgPopOver +=       '<div class="col-lg-12 col-sm-12"><a href="logout.do">로그아웃</a></div>';
+            msgPopOver +=   '</div>';
+            msgPopOver +=   '<div class="row">';
+            msgPopOver += '</div>';
+
+            $("#msgPopOver1").popover({
+                title:"temp",
+                content:msgPopOver,
+                animation:"true",
+                placement:"bottom",
+                html:"true"
+            })
+
+            $("#msgPopOver2").popover({
+                title:"temp",
+                content:msgPopOver,
+                animation:"true",
+                placement:"bottom",
+                html:"true"
+            })
+        })
     </script>
 	<title>Insert title here</title>
 </head>
