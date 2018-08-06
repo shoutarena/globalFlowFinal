@@ -10,13 +10,7 @@ public class MemberDAOImple implements MemberDAO {
 	
 	@Override
 	public MemberDTO loginCheck(MemberDTO temp) {
-		MemberDTO dto = sqlSessionTemplate.selectOne("loginCheck", temp);
-		if(dto != null) {
-			if(dto.getPwd().equals(temp.getPwd())) {
-				return dto;
-			}
-		}
-		return null;
+		return sqlSessionTemplate.selectOne("loginCheck", temp);
 	}
 
 }

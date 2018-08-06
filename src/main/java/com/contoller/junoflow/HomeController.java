@@ -23,36 +23,63 @@ public class HomeController {
 	private MemberDAO memdao;
 	
 	@RequestMapping(value = {"/", "/index.do"})
-	public String home(Locale locale, Model model) {
-		return "home";
+	public String home(Locale locale, Model model, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		String goPage = "";
+		if(session.getAttribute("user")!= null) {
+			MemberDTO dto = (MemberDTO)session.getAttribute("user");
+			if(dto.getGrade() == 0) {
+				goPage = "admin/admin";
+			}else {
+				goPage = "main";
+			}
+		}else {
+			goPage = "home";
+		}
+		return goPage;
 	}
 	
+	@RequestMapping(value="/admin.do")
+	public String admin() {
+		return "admin/admin";
+	}
+
 	@RequestMapping(value="/main.do")
-	public String gomain() {
+	public String gomain(HttpServletRequest req) {
 		return "main";
 	}
 	
 	@RequestMapping(value="/login.do")
-	public ModelAndView loginCheck(HttpServletRequest req, HttpServletResponse resp) {
+	public ModelAndView login(HttpServletRequest req, HttpServletResponse resp) {
 		MemberDTO temp = new MemberDTO();
+		String pwd = req.getParameter("pwd");
 		temp.setId(req.getParameter("id"));
-		temp.setPwd(req.getParameter("pwd"));
+		temp.setPwd(pwd);
 		MemberDTO dto = memdao.loginCheck(temp);
 		ModelAndView mav = new ModelAndView();
 		if(dto != null) {
-			HttpSession session = req.getSession();
-			session.setAttribute("dto", dto);
-			mav.addObject("msg", "로그인 성공");
-			mav.addObject("goUrl", "main.do");
-			
-			if(req.getParameter("rememId") != null) {
-				Cookie ck = new Cookie("saveid", dto.getId());
-				ck.setMaxAge(60*24*365);
-				resp.addCookie(ck);
+			System.out.println(dto.getPwd());
+			System.out.println(pwd);
+			if(dto.getPwd().equals(pwd)) {
+				HttpSession session = req.getSession();
+				session.setAttribute("user", dto);
+				if(dto.getGrade() == 0) {
+					mav.addObject("goUrl", "admin.do");
+				}else {
+					mav.addObject("goUrl", "main.do");
+				}
+				if(req.getParameter("rememId") != null) {
+					Cookie ck = new Cookie("saveid", dto.getId());
+					ck.setMaxAge(60*24*365);
+					resp.addCookie(ck);
+				}else {
+					Cookie ck = new Cookie("saveid", dto.getId());
+					ck.setMaxAge(0);
+					resp.addCookie(ck);
+				}
 			}else {
-				Cookie ck = new Cookie("saveid", dto.getId());
-				ck.setMaxAge(0);
-				resp.addCookie(ck);
+				mav.addObject("msg", "아이디 또는 비밀번호가 틀렸습니다. 인사과에 문의 바랍니다.");
+				mav.addObject("goUrl", "index.do");
 			}
 		}else {
 			mav.addObject("msg", "아이디 또는 비밀번호가 틀렸습니다. 인사과에 문의 바랍니다.");
@@ -62,4 +89,10 @@ public class HomeController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/logout.do")
+	public String logout(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		session.invalidate();
+		return "home";
+	}
 }
