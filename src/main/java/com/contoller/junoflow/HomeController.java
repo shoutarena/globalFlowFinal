@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.junoFlow.commons.GetCalendar;
+import com.junoFlow.commons.SelectDateModule;
 import com.member.model.junoflow.MemberDAO;
 import com.member.model.junoflow.MemberDTO;
 
@@ -22,31 +24,22 @@ public class HomeController {
 	@Autowired
 	private MemberDAO memdao;
 	
-	@RequestMapping(value = {"/", "/index.do"})
-	public String home(Locale locale, Model model, HttpServletRequest req) {
+	@RequestMapping(value = {"/", "/index.do", "/main.do"})
+	public ModelAndView home(HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		String goPage = "";
+		ModelAndView mav = new ModelAndView();
 		if(session.getAttribute("user")!= null) {
-			MemberDTO dto = (MemberDTO)session.getAttribute("user");
-			if(dto.getGrade() == 0) {
-				goPage = "admin/admin";
-			}else {
-				goPage = "main";
-			}
+			goPage = "main";
 		}else {
+			mav.addObject("selectDate", SelectDateModule.getSelectDate());
 			goPage = "home";
 		}
-		return goPage;
-	}
-	
-	@RequestMapping(value="/admin.do")
-	public String admin() {
-		return "admin/admin";
-	}
-
-	@RequestMapping(value="/main.do")
-	public String gomain(HttpServletRequest req) {
-		return "main";
+		
+		
+		mav.addObject("includPage", "main/writeForm.jsp");
+		mav.setViewName(goPage);
+		return mav;
 	}
 	
 	@RequestMapping(value="/login.do")
@@ -58,16 +51,10 @@ public class HomeController {
 		MemberDTO dto = memdao.loginCheck(temp);
 		ModelAndView mav = new ModelAndView();
 		if(dto != null) {
-			System.out.println(dto.getPwd());
-			System.out.println(pwd);
 			if(dto.getPwd().equals(pwd)) {
 				HttpSession session = req.getSession();
 				session.setAttribute("user", dto);
-				if(dto.getGrade() == 0) {
-					mav.addObject("goUrl", "admin.do");
-				}else {
-					mav.addObject("goUrl", "main.do");
-				}
+				mav.addObject("goUrl", "main.do");
 				if(req.getParameter("rememId") != null) {
 					Cookie ck = new Cookie("saveid", dto.getId());
 					ck.setMaxAge(60*24*365);

@@ -2,6 +2,25 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+    <link href="css/file/all-krajee.min.css?ver=201710271504" rel="stylesheet">
+    <link href="css/file/fileinput.min.css?ver=201807141150" rel="stylesheet">
+    <link href="css/file/fileinput-rtl.min.css?ver=201807141150" rel="stylesheet">
+    <script src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script>
+    <script src="https://buttons.github.io/buttons.js" async></script>
+
+    <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:'ca-pub-4718928441117602',enable_page_level_ads:true});
+    (function() {
+        var send = XMLHttpRequest.prototype.send,
+            token = document.getElementsByTagName('meta')['csrf-token'].content;
+        XMLHttpRequest.prototype.send = function(data) {
+            this.setRequestHeader('X-CSRF-Token', token);
+            return send.apply(this, arguments);
+        };
+    }());
+    function closepop() { $("#pop").popover("hide"); }</script>    <script>
+    !function(){var t,e="015793334654161961524:wlcacatlyyk",c=document.createElement("script");c.type="text/javascript",c.async=!0,c.src=("https:"==document.location.protocol?"https:":"http:")+"//www.google.com/cse/cse.js?cx="+e,t=document.getElementsByTagName("script")[0],t.parentNode.insertBefore(c,t)}();
+    </script>
+
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="row">
@@ -41,6 +60,11 @@
 					</c:if>
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">${ user.name }</li>
+						<c:if test="${ user.grade == 0 }">
+							<li>
+								<a href="admin.do"><span class="fas fa-cog">&nbsp;&nbsp;관리자 모드</span></a>
+							</li>
+						</c:if>
 						<li>
 							<a data-toggle="modal" href="#logoutModal">Logout</a>
 						</li>
@@ -124,6 +148,11 @@
 							</c:if>
 							<ul class="dropdown-menu">
 								<li class="dropdown-header">${ user.name }</li>
+								<c:if test="${ user.grade == 0 }">
+									<li>
+										<a href="admin.do"><span class="fas fa-cog">&nbsp;&nbsp;관리자 모드</span></a>
+									</li>
+								</c:if>
 								<li>
 									<a data-toggle="modal" href="#logoutModal">Logout</a>
 								</li>
@@ -156,3 +185,6 @@
 	
 		</div>
 	</div>
+	
+	
+	

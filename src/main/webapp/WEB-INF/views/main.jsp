@@ -28,8 +28,7 @@
 			text-decoration: none;
 		}
 		a:hover{
-			color:black;
-			font-weight:bold;
+			color:gray;
 			text-decoration: none;
 		}
         #userPopOver{
@@ -74,10 +73,12 @@
             })
         })
     </script>
-	<title>Insert title here</title>
+	<title>JunoFlow.</title>
 </head>
 <body>
 	<jsp:include page="commons/header.jsp" />
-	<jsp:include page="main/writeForm.jsp" />
+	<jsp:include page="${ includPage }" />
+	${includPage}
+	
 </body>
 </html>
