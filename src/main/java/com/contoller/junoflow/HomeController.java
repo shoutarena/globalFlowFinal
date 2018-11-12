@@ -21,8 +21,8 @@ import com.member.model.junoflow.MemberDTO;
 @Controller
 public class HomeController {
 
-	@Autowired
-	private MemberDAO memdao;
+	/*@Autowired
+	private MemberDAO memdao;*/
 	
 	@RequestMapping(value = {"/", "/index.do", "/main.do"})
 	public ModelAndView home(HttpServletRequest req) {
@@ -42,7 +42,7 @@ public class HomeController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/login.do")
+	/*@RequestMapping(value="/login.do")
 	public ModelAndView login(HttpServletRequest req, HttpServletResponse resp) {
 		MemberDTO temp = new MemberDTO();
 		String pwd = req.getParameter("pwd");
@@ -81,5 +81,5 @@ public class HomeController {
 		HttpSession session = req.getSession();
 		session.invalidate();
 		return "home";
-	}
+	}*/
 }
