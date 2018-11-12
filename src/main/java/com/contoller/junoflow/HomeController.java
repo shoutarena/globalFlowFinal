@@ -83,8 +83,9 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value="/asdkj.do")
-	public String asdfklj() {
+	@RequestMapping(value="/sd.do")
+	public String sdkjf() {
+		
 		return "";
 	}
 }
