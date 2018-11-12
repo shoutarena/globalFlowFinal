@@ -65,11 +65,11 @@ public class HomeController {
 					resp.addCookie(ck);
 				}
 			}else {
-				mav.addObject("msg", "아이디 또는 비밀번호가 틀렸습니다. 인사과에 문의 바랍니다.");
+				mav.addObject("msg", "�븘�씠�뵒 �삉�뒗 鍮꾨�踰덊샇媛� ���졇�뒿�땲�떎. �씤�궗怨쇱뿉 臾몄쓽 諛붾엻�땲�떎.");
 				mav.addObject("goUrl", "index.do");
 			}
 		}else {
-			mav.addObject("msg", "아이디 또는 비밀번호가 틀렸습니다. 인사과에 문의 바랍니다.");
+			mav.addObject("msg", "�븘�씠�뵒 �삉�뒗 鍮꾨�踰덊샇媛� ���졇�뒿�땲�떎. �씤�궗怨쇱뿉 臾몄쓽 諛붾엻�땲�떎.");
 			mav.addObject("goUrl", "index.do");
 		}
 		mav.setViewName("commons/globalMsg");
@@ -81,5 +81,10 @@ public class HomeController {
 		HttpSession session = req.getSession();
 		session.invalidate();
 		return "home";
+	}
+	
+	@RequestMapping(value="/asdkj.do")
+	public String asdfklj() {
+		return "";
 	}
 }
